@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 function Band(props) {
   return (
     <React.Fragment>
-      <div onClick={() => props.whenBandClicked(props.id)}>
+      <div onClick={() => props.whenBandClicked(props.band)}>
         <h3>{props.name}</h3>
       </div>
     </React.Fragment>
@@ -14,6 +14,7 @@ function Band(props) {
 Band.propTypes = {
   name: PropTypes.string,
   id: PropTypes.string,
+  band: PropTypes.object,
   whenBandClicked: PropTypes.func
 };
 

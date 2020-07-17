@@ -1,5 +1,6 @@
 import React from 'react';
 import Band from './Band';
+import BandDetail from './BandDetail';
 
 class Bands extends React.Component {
   constructor(props) {
@@ -7,7 +8,8 @@ class Bands extends React.Component {
     this.state = {
       error: null,
       isLoaded: false,
-      bands: []
+      bands: [],
+      selectedBand: null
     };
   }
 
@@ -55,8 +57,12 @@ class Bands extends React.Component {
       });
   }
 
-  onClickingSelect = (id) => {
-    console.log("yeet" + id);
+  onClickingSelect = (band) => {
+    console.log("yeet" + band.id);
+    console.log("bandname" + band.name);
+    this.setState({
+      selectedBand: band
+    })
   }
 
   componentDidMount() {
@@ -66,17 +72,20 @@ class Bands extends React.Component {
 
   render() {
     const { error, isLoaded, bands } = this.state;
+    let currentlyVisibleState = null;
     if (error) {
       console.log(this.state.bands);
       console.log("error!" + bands);
-      return <React.Fragment>Error: {error.message}</React.Fragment>;
+      currentlyVisibleState = <React.Fragment>Error: {error.message}</React.Fragment>;
     } else if (!isLoaded) {
       console.log("loading!" + bands);
-      return <React.Fragment>Loading...</React.Fragment>;
+      currentlyVisibleState = <React.Fragment>Loading...</React.Fragment>;
+    } else if (this.state.selectedBand != null) {
+      currentlyVisibleState = <BandDetail band={this.state.selectedBand} />
     } else {
       console.table(bands);
 
-      return (
+      currentlyVisibleState = (
         <React.Fragment>
           <h1>bands</h1>
           <ul>
@@ -85,6 +94,7 @@ class Bands extends React.Component {
               <li>
                 <Band
                   name={band.name}
+                  band={band}
                   id={band.bandId}
                   whenBandClicked={this.onClickingSelect}
                 />
@@ -94,6 +104,7 @@ class Bands extends React.Component {
         </React.Fragment>
       );
     }
+    return currentlyVisibleState;
   }
 }
 export default Bands;
