@@ -1,4 +1,5 @@
 import React from 'react';
+import Band from './Band';
 
 class Bands extends React.Component {
   constructor(props) {
@@ -40,13 +41,8 @@ class Bands extends React.Component {
           });
           console.log("current state: " + this.state.bands);
           console.log(typeof (this.state.bands[0]));
-          let testArray = [];
-          // testArray = Object.keys(this.state.bands).map((band, index) => {
-          //   testArray.push(band);
-          // });
-          // console.table(testArray);
-
-
+          let
+            testArray = [];
 
         }
 
@@ -57,16 +53,16 @@ class Bands extends React.Component {
           error
         });
       });
-
   }
 
+  onClickingSelect = (id) => {
+    console.log("yeet" + id);
+  }
 
   componentDidMount() {
     this.makeApiCall()
 
   }
-
-
 
   render() {
     const { error, isLoaded, bands } = this.state;
@@ -84,12 +80,16 @@ class Bands extends React.Component {
         <React.Fragment>
           <h1>bands</h1>
           <ul>
+
             {bands.map(band =>
-              <li key={band.bandId}>
-                <h3>{band.name}</h3>
-                <p>{band.musicLink}</p>
+              <li>
+                <Band
+                  name={band.name}
+                  id={band.bandId}
+                  whenBandClicked={this.onClickingSelect}
+                />
               </li>
-            )}
+            )};
           </ul>
         </React.Fragment>
       );
