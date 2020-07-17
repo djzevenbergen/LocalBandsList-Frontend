@@ -1,11 +1,10 @@
 import React from 'react';
-import './App.css';
-import Headlines from './Headlines';
+import BandList from './BandList';
 
 function App() {
   return (
     <React.Fragment>
-      < Headlines />
+      < BandList />
     </React.Fragment>
   );
 }
