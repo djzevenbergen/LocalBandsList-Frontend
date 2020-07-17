@@ -36,10 +36,18 @@ class Bands extends React.Component {
           console.log(jsonifiedResponse);
           this.setState({
             isLoaded: true,
-            bands: jsonifiedResponse
+            bands: jsonifiedResponse.bands
           });
           console.log("current state: " + this.state.bands);
-          console.log(typeof (this.state.bands));
+          console.log(typeof (this.state.bands[0]));
+          let testArray = [];
+          // testArray = Object.keys(this.state.bands).map((band, index) => {
+          //   testArray.push(band);
+          // });
+          // console.table(testArray);
+
+
+
         }
 
       )
@@ -63,20 +71,25 @@ class Bands extends React.Component {
   render() {
     const { error, isLoaded, bands } = this.state;
     if (error) {
+      console.log(this.state.bands);
+      console.log("error!" + bands);
       return <React.Fragment>Error: {error.message}</React.Fragment>;
     } else if (!isLoaded) {
+      console.log("loading!" + bands);
       return <React.Fragment>Loading...</React.Fragment>;
     } else {
+      console.table(bands);
+
       return (
         <React.Fragment>
           <h1>bands</h1>
           <ul>
-            {Object.values(bands).map((band, index) =>
+            {/* {Object.keys(bands).map((band, index) =>
               <li key={index}>
-                <h3>{bands[index].Name}</h3>
+                <h3>{bands[band]}</h3>
                 {/* <p>{band.musicLink}</p> */}
-              </li>
-            )}
+            {/* </li> */}
+
           </ul>
         </React.Fragment>
       );
