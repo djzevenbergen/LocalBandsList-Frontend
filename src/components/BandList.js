@@ -84,12 +84,12 @@ class Bands extends React.Component {
         <React.Fragment>
           <h1>bands</h1>
           <ul>
-            {/* {Object.keys(bands).map((band, index) =>
-              <li key={index}>
-                <h3>{bands[band]}</h3>
-                {/* <p>{band.musicLink}</p> */}
-            {/* </li> */}
-
+            {bands.map(band =>
+              <li key={band.bandId}>
+                <h3>{band.name}</h3>
+                <p>{band.musicLink}</p>
+              </li>
+            )}
           </ul>
         </React.Fragment>
       );
